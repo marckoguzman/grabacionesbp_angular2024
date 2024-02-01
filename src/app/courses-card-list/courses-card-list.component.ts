@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Course} from '../model/course';
+import {Recordings} from '../model/recordings';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {openEditCourseDialog} from '../course-dialog/course-dialog.component';
 import {filter} from 'rxjs/operators';
@@ -14,6 +15,7 @@ export class CoursesCardListComponent implements OnInit {
 
     @Input()
     courses: Course[];
+    recordings: Recordings[];
 
     cols = 1;
 
@@ -63,14 +65,27 @@ export class CoursesCardListComponent implements OnInit {
 
     }
 
-    editCourse(course: Course) {
+    editCourse1(course: Course) {
 
-        openEditCourseDialog(this.dialog, course)
+       /* openEditCourseDialog(this.dialog, course)
             .pipe(
                 filter(val => !!val)
             )
             .subscribe(
                 val => console.log('new course value:', val)
+            );
+
+*/
+    }
+
+    editCourse(recordings: Recordings) {
+
+        openEditCourseDialog(this.dialog, recordings)
+            .pipe(
+                filter(val => !!val)
+            )
+            .subscribe(
+                val => console.log('nuevo valor de grabacion:', val)
             );
 
 

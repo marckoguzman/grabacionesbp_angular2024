@@ -8,6 +8,7 @@ import { tap, catchError, finalize} from 'rxjs/operators';
 import {merge, throwError} from 'rxjs';
 import {Lesson} from '../model/lesson';
 import {SelectionModel} from '@angular/cdk/collections';
+import {HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
 
 
 @Component({
@@ -17,11 +18,24 @@ import {SelectionModel} from '@angular/cdk/collections';
 })
 export class CourseComponent implements OnInit, AfterViewInit {
 
+
+    private httpOptions = {
+        headers: new HttpHeaders({
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, OPTIONS, POST",
+          "Content-Type": "application/json"
+        })
+      };
+
+
     course:Course;
 
     lessons: Lesson[] = [];
 
     loading = false;
+
+    private collecctionToAdd = {};
 
     @ViewChild(MatPaginator)
     paginator: MatPaginator;
@@ -33,7 +47,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
 
     constructor(private route: ActivatedRoute,
-                private coursesService: CoursesService) {
+                private coursesService: CoursesService,private http: HttpClient) {
 
     }
 
@@ -53,7 +67,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
         this.selection.toggle(lesson);
 
-        console.log(this.selection.selected);
+      //  console.log(this.selection.selected);
 
     }
 
@@ -90,6 +104,39 @@ export class CourseComponent implements OnInit, AfterViewInit {
         }
 
     }
+
+    save() {
+
+        this.course;
+    }
+    close() {
+
+        this.course;
+    }
+
+    submit2() {
+        const rowsToSubmit = []
+        for (const key in this.collecctionToAdd) {
+          const element: any = this.collecctionToAdd[key]
+          rowsToSubmit.push(element)
+        }
+        console.log(this.selection.selected);
+      }
+
+      submit() {
+
+//https://e7ui02jlxc.execute-api.us-east-1.amazonaws.com/Stage/p1
+//https://71ryxc655c.execute-api.us-east-1.amazonaws.com/dev/api/downloadZip
+        this.http.post('https://e7ui02jlxc.execute-api.us-east-1.amazonaws.com/Stage/p1', this.selection.selected).subscribe(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.error(error + this.selection.selected );
+          }
+        );
+      }
+      
 
     ngAfterViewInit() {
 

@@ -20,7 +20,7 @@
 
             <mat-card-content>
 
-                <p>{{course.longDescription}}</p>
+                <p>course.longDescription</p>
 
             </mat-card-content>
 
@@ -29,11 +29,11 @@
 
                 <button mat-raised-button color="primary"
                         [routerLink]="['courses', course.id]">
-                    VIEW COURSE
+                    Ver
                 </button>
 
-                <button mat-raised-button color="accent" (click)="editCourse(course)">
-                    EDIT COURSE
+                <button mat-raised-button color="accent" (click)="editCourse(recordings)">
+                    Consultar
                 </button>
 
             </mat-card-actions>

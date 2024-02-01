@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {Course} from "../model/course";
 import {map} from "rxjs/operators";
 import {Lesson} from "../model/lesson";
+import {Recordings} from "../model/recordings";
 
 
 @Injectable()
@@ -52,5 +53,34 @@ export class CoursesService {
             map(res =>  res["payload"])
         );
     }
+
+    findRecords(
+        id:number, sortOrder = 'asc',
+        pageNumber = 0, pageSize = 3, sortColumn = 'title'):  Observable<Recordings[]> {
+
+        return this.http.get('https://jsonplaceholder.typicode.com/posts', {
+        }).pipe(
+            map(res =>  res["payload"])
+            
+        );
+        
+    }
+
+/*
+    this.service.getPosts()
+    .subscribe(response => {
+      this.posts = response;
+    });
+*/
+
+/*
+private url = 'http://jsonplaceholder.typicode.com/posts';
+
+constructor(private httpClient: HttpClient) { }
+
+getPosts() {
+  return this.httpClient.get(this.url);
+}
+*/
 
 }

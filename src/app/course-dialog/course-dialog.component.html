@@ -6,18 +6,27 @@
 
     <mat-dialog-content [formGroup]="form">
 
+
+
         <mat-form-field>
 
-            <input matInput
-                   placeholder="Course Description"
-                   formControlName="description">
+            <input matInput [matDatepicker]="myDatepicker"
+                   formControlName="fecha" >
+
+            <mat-datepicker-toggle matSuffix
+                                   [for]="myDatepicker">
+
+            </mat-datepicker-toggle>
+
+            <mat-datepicker #myDatepicker></mat-datepicker>
 
         </mat-form-field>
 
+
         <mat-form-field>
 
-            <mat-select placeholder="Select category"
-                        formControlName="category">
+            <mat-select placeholder="Seleccione la cola"
+                        formControlName="queue">
 
                 <mat-option value="BEGINNER">
                     Beginner</mat-option>
@@ -32,24 +41,25 @@
 
         <mat-form-field>
 
-            <input matInput [matDatepicker]="myDatepicker"
-                   formControlName="releasedAt">
+            <mat-select placeholder="Seleccione el usuario"
+                        formControlName="users">
 
-            <mat-datepicker-toggle matSuffix
-                                   [for]="myDatepicker">
+                <mat-option value="A ZAZA">
+                    A ZAZA</mat-option>
+                <mat-option value="E ITER">
+                    E ITER</mat-option>
+                <mat-option value="F VIZUER">
+                    F VIZUER</mat-option>
 
-            </mat-datepicker-toggle>
-
-            <mat-datepicker #myDatepicker></mat-datepicker>
+            </mat-select>
 
         </mat-form-field>
 
         <mat-form-field>
 
-        <textarea matInput placeholder="Description"
-                  formControlName="longDescription">
-
-        </textarea>
+            <input matInput
+                   placeholder="Identificacion"
+                   formControlName="identificacion">
 
         </mat-form-field>
 
@@ -57,9 +67,9 @@
 
     <mat-dialog-actions>
 
-        <button mat-raised-button (click)="close()">Close</button>
+        <button mat-raised-button (click)="close()">Cerrar</button>
 
-        <button mat-raised-button color="primary" (click)="save()">Save</button>
+        <button mat-raised-button color="primary" (click)="save()">Consultar</button>
 
     </mat-dialog-actions>
 

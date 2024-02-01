@@ -47,30 +47,30 @@
 
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
 
-                <td mat-cell *matCellDef="let lesson">{{lesson.seqNo}}</td>
+                <td mat-cell *matCellDef="let lesson">{{lesson.courseId}}</td>
 
             </ng-container>
 
             <ng-container matColumnDef="description">
 
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Conversacion</th>
 
-                <td mat-cell *matCellDef="let lesson">{{lesson.description}}</td>
+                <td mat-cell *matCellDef="let lesson">{{lesson.conversationId}}</td>
 
             </ng-container>
 
             <ng-container matColumnDef="duration">
 
-                <th mat-header-cell *matHeaderCellDef>Duration</th>
+                <th mat-header-cell *matHeaderCellDef>Duracion</th>
 
-                <td class="duration-cell" mat-cell *matCellDef="let lesson">{{lesson.duration}}</td>
+                <td class="duration-cell" mat-cell *matCellDef="let lesson">{{lesson.namefile}}</td>
 
             </ng-container>
 
             <ng-container matColumnDef="expandedDetail">
 
                 <td mat-cell *matCellDef="let lesson" colspan="4">
-                    {{lesson.longDescription}}
+                    {{lesson.path}}
                 </td>
 
             </ng-container>
@@ -92,8 +92,10 @@
 
 
         </table>
-
+       
     </div>
+
+
 
     <mat-paginator class="mat-elevation-z8"
                    [length]="course?.lessonsCount"
@@ -101,7 +103,15 @@
                    [pageSizeOptions]="[3, 5, 10]">
 
     </mat-paginator>
+    <mat-dialog-actions>
+        <button mat-raised-button color="primary" (click)="submit()">Descargar</button>
+        <button mat-raised-button (click)="close()">Cerrar 1</button>
 
+        <button mat-raised-button color="primary" (click)="save()">Consultar 1</button>
+
+    </mat-dialog-actions>
+
+    
 </div>
 
 
