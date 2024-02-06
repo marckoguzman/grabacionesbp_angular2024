@@ -17,10 +17,10 @@ export const COURSES: any = {
 
 };
 
-export const LESSONS = {
-  1:{
+export const LESSONS = [
+  {
     id: 1,
-    conversationId: 'acc32f36-73e4-4817-93d0-8ff4074214e3',
+    conversationId: '22222222-73e4-4817-93d0-8ff4074214e3',
     conversationStart: '2024-01-02T16:51:43.159Z',
     path: 'year=2024/month=1/day=2/hour=16/conversation_id=acc32f36-73e4-4817-93d0-8ff4074214e3',
     customerDocumentNumber: '1715592547',
@@ -29,8 +29,8 @@ export const LESSONS = {
     namefile: 'acc32f36-73e4-4817-93d0-8ff4074214e3_AGUILAR MOLINA JAIME RENAN_ELIMINACION CLAVE DIGITAL KN_20240102_16',
     courseId: 11
 },
-2:{
-    id: 2,
+{
+    id:2,
     conversationId: '085ff8c8-32ed-471e-9cd0-9f4b1ed2f305',
     conversationStart: '2024-01-02T16:57:26.269Z',
     path: 'year=2024/month=1/day=2/hour=16/conversation_id=085ff8c8-32ed-471e-9cd0-9f4b1ed2f305',
@@ -39,10 +39,32 @@ export const LESSONS = {
     queueName: 'ELIMINACION CLAVE DIGITAL KN',
     namefile: '085ff8c8-32ed-471e-9cd0-9f4b1ed2f305_AGUILAR MOLINA JAIME RENAN_ELIMINACION CLAVE DIGITAL KN_20240102_16',
     courseId: 11
+},
+{
+  id: 3,
+  conversationId: '33333333-73e4-4817-93d0-8ff4074214e3',
+  conversationStart: '2024-01-02T16:51:43.159Z',
+  path: 'year=2024/month=1/day=2/hour=16/conversation_id=acc32f36-73e4-4817-93d0-8ff4074214e3',
+  customerDocumentNumber: '1715592547',
+  customerFullName: 'DIANA CRISTINA HIDALGO LAVAYEN',
+  queueName: 'ELIMINACION CLAVE DIGITAL KN',
+  namefile: 'acc32f36-73e4-4817-93d0-8ff4074214e3_AGUILAR MOLINA JAIME RENAN_ELIMINACION CLAVE DIGITAL KN_20240102_16',
+  courseId: 11
+},
+{
+  id:4,
+  conversationId: '44444444-32ed-471e-9cd0-9f4b1ed2f305',
+  conversationStart: '2024-01-02T16:57:26.269Z',
+  path: 'year=2024/month=1/day=2/hour=16/conversation_id=085ff8c8-32ed-471e-9cd0-9f4b1ed2f305',
+  customerDocumentNumber: '1715592547',
+  customerFullName: 'DIANA CRISTINA HIDALGO LAVAYEN',
+  queueName: 'ELIMINACION CLAVE DIGITAL KN',
+  namefile: '085ff8c8-32ed-471e-9cd0-9f4b1ed2f305_AGUILAR MOLINA JAIME RENAN_ELIMINACION CLAVE DIGITAL KN_20240102_16',
+  courseId: 11
 }
 
 
-};
+];
 
 
 export const USERS = {
@@ -57,12 +79,12 @@ export const USERS = {
 };
 
 
-export function findCourseById(courseId: number) {
-  return COURSES[courseId];
+export function findCourseById(conversationId: string) {
+  return COURSES[conversationId];
 }
 
-export function findLessonsForCourse(courseId: number) {
-  return Object.values(LESSONS).filter(lesson => lesson.courseId == courseId);
+export function findLessonsForCourse(conversationId: string) {
+  return Object.values(LESSONS).filter(lesson => lesson.conversationId == conversationId);
 }
 
 export function authenticate(email: string, password: string) {

@@ -46,6 +46,16 @@ import {MatTreeModule} from '@angular/material/tree';
 import {VirtualScrollingComponent} from './virtual-scrolling/virtual-scrolling.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { Component } from '@angular/core';
+import { Amplify } from 'aws-amplify';
+
+
+var json = require('../amplifyconfiguration.json')
+
+Amplify.configure(json);
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -63,6 +73,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     ],
     imports: [
         BrowserModule,
+        AmplifyAuthenticatorModule,
         BrowserAnimationsModule,
         HttpClientModule,
         MatMenuModule,
@@ -100,4 +111,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     bootstrap: [AppComponent]
 })
 export class AppModule {
+
+    
+
+ 
+
 }

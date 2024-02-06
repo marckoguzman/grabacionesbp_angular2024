@@ -114,7 +114,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
         this.course;
     }
 
-    submit2() {
+    submit() {
         const rowsToSubmit = []
         for (const key in this.collecctionToAdd) {
           const element: any = this.collecctionToAdd[key]
@@ -123,7 +123,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
         console.log(this.selection.selected);
       }
 
-      submit() {
+      submit3() {
 
 //https://e7ui02jlxc.execute-api.us-east-1.amazonaws.com/Stage/p1
 //https://71ryxc655c.execute-api.us-east-1.amazonaws.com/dev/api/downloadZip

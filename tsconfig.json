@@ -8,6 +8,9 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "target": "ES2022",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "node_modules/@types"
     ],

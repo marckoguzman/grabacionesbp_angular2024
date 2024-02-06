@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { signOut } from 'aws-amplify/auth';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  public async salga() {
+    try {
+       await signOut();
+    } catch (error) {
+      console.log('error signing out: ', error);
+    }
+  }
 }
