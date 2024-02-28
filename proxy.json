@@ -3,9 +3,16 @@
     "target": "http://localhost:9000",
     "secure": false
   },
-  "/api/": {
-    "target": "https://71ryxc655c.execute-api.us-east-1.amazonaws.com/dev/api/downloadZip",
+  "/api/downloadZip": {
+    "target": "https://71ryxc655c.execute-api.us-east-1.amazonaws.com/dev",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/downloadRecords": {
+    "target": "https://71ryxc655c.execute-api.us-east-1.amazonaws.com/dev",
     "secure": false,
     "logLevel": "debug"
   }
 }
+
+

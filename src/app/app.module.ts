@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -49,8 +49,11 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { Component } from '@angular/core';
 import { Amplify } from 'aws-amplify';
-
-
+import { NgSelectModule } from '@ng-select/ng-select';
+//import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+//import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgMultiSelectDropDownModule,IDropdownSettings } from 'ng-multiselect-dropdown';
+//import { MultiSelectDropdownComponent } from './multiselect-drop-down/multi-select-dropdown.component';
 var json = require('../amplifyconfiguration.json')
 
 Amplify.configure(json);
@@ -70,6 +73,7 @@ Amplify.configure(json);
         DragDropComponent,
         TreeDemoComponent,
         VirtualScrollingComponent
+        
     ],
     imports: [
         BrowserModule,
@@ -103,12 +107,15 @@ Amplify.configure(json);
         ReactiveFormsModule,
         MatGridListModule,
         MatTreeModule,
-        ScrollingModule
+        ScrollingModule,
+        FormsModule,
+        NgMultiSelectDropDownModule.forRoot()
     ],
     providers: [
         CoursesService
     ],
     bootstrap: [AppComponent]
+
 })
 export class AppModule {
 

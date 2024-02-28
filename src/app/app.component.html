@@ -68,23 +68,18 @@
             Registrarse
         </a>
 
-        <a mat-button>
+        <a mat-button (click)="salga()">
             <mat-icon>account_circle</mat-icon>
             Logout
         </a>
 
         <a>
-            <button (click)="salga()">Salir</button>
+            <button mat-raised-button color="primary" (click)="salga()">Salir</button>
         </a>
-
-        <a>
-            <button mat-raised-button color="primary" (click)="this.save()">Consultar 1</button>
-        </a>
-
 
         <a >
             <mat-icon>account_circle</mat-icon>
-            <h1>Welcome {{ user.email }}!</h1>
+            <h1>Welcome {{ user.username }}!</h1>
         </a>
         
         

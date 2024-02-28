@@ -6,8 +6,7 @@
 
     <mat-dialog-content [formGroup]="form">
 
-
-
+      
         <mat-form-field>
 
             <input matInput [matDatepicker]="myDatepicker"
@@ -26,7 +25,7 @@
         <mat-form-field>
 
             <mat-select placeholder="Seleccione la cola"
-                        formControlName="queue">
+                        formControlName="cola">
 
                 <mat-option value="BEGINNER">
                     Beginner</mat-option>
@@ -37,23 +36,10 @@
 
             </mat-select>
 
-        </mat-form-field>
-
-        <mat-form-field>
-
-            <mat-select placeholder="Seleccione el usuario"
-                        formControlName="users">
-
-                <mat-option value="A ZAZA">
-                    A ZAZA</mat-option>
-                <mat-option value="E ITER">
-                    E ITER</mat-option>
-                <mat-option value="F VIZUER">
-                    F VIZUER</mat-option>
-
-            </mat-select>
 
         </mat-form-field>
+
+
 
         <mat-form-field>
 
@@ -63,7 +49,52 @@
 
         </mat-form-field>
 
+        <mat-form-field>
+
+            <input matInput
+                   placeholder="ani"
+                   formControlName="ani">
+
+        </mat-form-field>
+
+        <mat-form-field>
+
+            <input matInput
+                   placeholder="dnis"
+                   formControlName="dnis">
+
+        </mat-form-field>
+
+        <mat-form-field>
+
+            <input matInput
+                   placeholder="conversationId"
+                   formControlName="conversationId">
+
+        </mat-form-field>
+
     </mat-dialog-content>
+
+
+    <ng-multiselect-dropdown
+    [placeholder]="'usuario'"
+    [data]="dropdownList"
+    [(ngModel)]="selectedItems"
+    [settings]="dropdownSettings"
+    (onSelect)="onItemSelect($event)"
+    (onSelectAll)="onSelectAll($event)"
+    >
+    </ng-multiselect-dropdown>
+
+    <ng-multiselect-dropdown class="edit-course-form"
+    [placeholder]="'cola'"
+    [data]="dropdownListQU"
+    [(ngModel)]="selectedItemsQU"
+    [settings]="dropdownSettingsQU"
+    (onSelect)="onItemSelectQU($event)"
+    (onSelectAll)="onSelectAllQU($event)"
+    >
+    </ng-multiselect-dropdown>
 
     <mat-dialog-actions>
 

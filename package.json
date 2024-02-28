@@ -26,11 +26,13 @@
     "@angular/platform-browser-dynamic": "17.0.3",
     "@angular/router": "17.0.3",
     "@aws-amplify/ui-angular": "^5.0.8",
+    "@ng-select/ng-select": "^12.0.7",
     "aws-amplify": "^6.0.13",
     "core-js": "^2.4.1",
     "cors": "^2.8.5",
     "express": "^4.16.2",
     "moment": "^2.22.2",
+    "ng-multiselect-dropdown": "^1.0.0",
     "rxjs": "6.5.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.14.2"

@@ -1,6 +1,17 @@
+<!--
+<ng-multiselect-dropdown
+[placeholder]="'custom placeholder'"
+[data]="dropdownList"
+[(ngModel)]="selectedItems"
+[settings]="dropdownSettings"
+(onSelect)="onItemSelect($event)"
+(onSelectAll)="onSelectAll($event)"
+>
+</ng-multiselect-dropdown>
 
+-->
 
-<mat-grid-list [cols]="cols" [rowHeight]="rowHeight"
+<mat-grid-list [cols]="cols" [rowHeight]="180"
                [ngClass]="{'handset-portrait': handsetPortrait}" >
 
     <mat-grid-tile  *ngFor="let course of courses">
@@ -8,35 +19,23 @@
         <mat-card class="course-card mat-elevation-z7">
 
             <mat-card-header>
-
                 <mat-card-title>{{course.description}}</mat-card-title>
-
             </mat-card-header>
 
-
-            <img mat-card-image [src]="course.iconUrl">
-
-
-
             <mat-card-content>
-
-                <p>course.longDescription</p>
-
+                <p>{{course.longDescription}}</p>
             </mat-card-content>
 
 
-            <mat-card-actions class="course-actions">
+-
+              <mat-card-actions class="course-actions">
+                    <button mat-raised-button color="primary" (click)="editCourse(recordings)">
+                        Consultar
+                   </button>
 
-                <button mat-raised-button color="primary"
-                        [routerLink]="['courses', course.id]">
-                    Ver
-                </button>
 
-                <button mat-raised-button color="accent" (click)="editCourse(recordings)">
-                    Consultar
-                </button>
-
-            </mat-card-actions>
+               
+               </mat-card-actions>
 
 
 
@@ -44,8 +43,223 @@
 
     </mat-grid-tile>
 
-
 </mat-grid-list>
+
+<!--
+<table id="users">
+    <tr>
+      <th *ngFor="let col of columns">
+        {{col}}
+      </th>
+    </tr>
+    <tr *ngFor="let user of grabs">
+      <td *ngFor="let col of index">
+        {{user[col]}}
+      </td>
+    </tr>
+  </table>
+
+-->
+
+
+
+<mat-form-field>
+  <mat-label>Filtro</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder=" " #input />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="tableDataSource" matSort>
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          *ngIf="gridMultiselect"
+          color="primary"
+          (click)="$event.preventDefault();masterToggle()"
+          [checked]="masterIsChecked"
+          [indeterminate]="masterIsIndeterminate"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          color="primary"
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="conversationId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>conversationId</th>
+      <td mat-cell *matCellDef="let row">{{row.conversationId}}%</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="namefile">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>namefile</th>
+      <td mat-cell *matCellDef="let row">{{row.namefile}}</td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="path">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Path</th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.path">
+        <a>{{row.path}}</a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      [ngClass]="{'dib-grid-selected': isHighlighted(row)}"
+      *matRowDef="let row; columns: displayedColumns;"
+      (click)="rowClick(row,$event)"
+    ></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        Los datos no coincidien con el filtro "{{input.value}}"
+      </td>
+    </tr>
+  </table>
+
+  <ng-template
+    *ngIf="gridShowClipboard"
+    [ngTemplateOutlet]="clipboard"
+  ></ng-template>
+
+  <mat-toolbar>
+    <mat-toolbar-row style="background: white">
+      <mat-checkbox
+        *ngIf="numberOfSelectedItems"
+        class="mat-body"
+        matTooltip="Clear all"
+        position="above"
+        color="primary"
+        (click)="$event.preventDefault();clearAll()"
+        [checked]="true"
+      >
+        {{numberOfSelectedItems + " "}}item{{numberOfSelectedItems>1?"s ":"
+        "}}selected
+      </mat-checkbox>
+      <button
+        *ngIf="showVisibilityButton"
+        mat-button
+        (click)="gridShowClipboard = !gridShowClipboard"
+      >
+        <mat-icon *ngIf="!gridShowClipboard">visibility</mat-icon>
+        <mat-icon *ngIf="gridShowClipboard">visibility_off</mat-icon>
+        {{gridShowClipboard?"hide":"show"}}
+      </button>
+      <span style="flex: 1 1 auto"></span>
+      <mat-paginator
+        class="paginator"
+        (page)="page($event)"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+      >
+      </mat-paginator>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+<!-- 
+<div *ngIf="selectAccrossPages" class="clipboard mat-elevation-z8"></div>
+
+Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
+
+<ng-template #clipboard>
+  <table
+    mat-table
+    style="margin-top:1rem"
+    [dataSource]="selectionDataSource"
+    matSort
+  >
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          color="primary"
+          (change)="$event ? masterToggle() : null"
+          [checked]="masterIsChecked"
+          [indeterminate]="masterIsIndeterminate"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          color="primary"
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="progress">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Progress</th>
+      <td mat-cell *matCellDef="let row">{{row.conversationId}}%</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.namefile}}</td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Color</th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.path">
+        {{row.path}}
+      </td>
+    </ng-container>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</ng-template>
+
+<mat-grid-list [cols]="cols" [rowHeight]="100"
+               [ngClass]="{'handset-portrait': handsetPortrait}" >
+    <mat-grid-tile  *ngFor="let course of courses">
+        <mat-card class="course-card mat-elevation-z7">
+              <mat-card-actions class="course-actions">
+
+				<button mat-raised-button color="accent" (click)=" clientdataClick()">
+				Descargar Archivo ZIP
+				</button>
+               
+               </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<section>
+  <pre><code>{{clientData}}</code></pre>
+</section>
+
 
 
 
